@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<string> listaCompras = new List<string>();
+        bool continuar = true;
+
+        while (continuar)
+        {
+            Console.WriteLine("1. Adicionar item");
+            Console.WriteLine("2. Remover item");
+            Console.WriteLine("3. Listar itens");
+            Console.WriteLine("4. Mostrar quantidade total");
+            Console.WriteLine("0. Sair");
+            Console.Write("Escolha uma opcao: ");
+
+            string opcao = Console.ReadLine();
+            Console.WriteLine(); 
+
+            switch (opcao)
+            {
+                case "1":
+                    Console.Write("Digite o nome do item para adicionar: ");
+                    string itemAdicionar = Console.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(itemAdicionar))
+                    {
+                        listaCompras.Add(itemAdicionar);
+                        Console.WriteLine($"'{itemAdicionar}' adicionado à lista!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nome invalido.");
+                    }
+                    break;
+
+                case "2":
+                    Console.Write("Digite o nome do item para remover: ");
+                    string itemRemover = Console.ReadLine();
+                    if (listaCompras.Remove(itemRemover))
+                    {
+                        Console.WriteLine($" '{itemRemover}' removido da lista.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Item nao encontrado.");
+                    }
+                    break;
+
+                case "3":
+                    if (listaCompras.Count == 0)
+                    {
+                        Console.WriteLine(" A lista esta vazia.");
+                    }
+                    else
+                    {
+                        Console.WriteLine(" Itens na lista de compras:");
+                        foreach (string item in listaCompras)
+                        {
+                            Console.WriteLine($"- {item}");
+                        }
+                    }
+                    break;
+
+                case "4":
+                    Console.WriteLine($" Quantidade total de itens: {listaCompras.Count}");
+                    break;
+
+                case "0":
+                    continuar = false;
+                    Console.WriteLine("Saindo, Até a próxima!");
+                    break;
+
+                default:
+                    Console.WriteLine("opcao invalida. Tente novamente.");
+                    break;
+            }
+        }
+    }
+}
