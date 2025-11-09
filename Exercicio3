@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void Main()
+    {
+        HashSet<int> numUnicos = new HashSet<int>();
+
+        Console.WriteLine("Digite numeros inteiros (digite 0 para parar):");
+
+        while (true)
+        {
+            Console.Write("Numero: ");
+            string num1 = Console.ReadLine();
+
+            if (!int.TryParse(num1, out int numero))
+            {
+                Console.WriteLine("Entrada invalida. Digite um numero inteiro.\n");
+                continue;
+            }
+
+            
+            if (numero == 0)
+            {
+                break;
+            }
+
+            if (numUnicos.Add(numero))
+            {
+                Console.WriteLine("Numero adicionado!");
+            }
+            else
+            {
+                Console.WriteLine("Numero ja digitado, ignorado.");
+            }
+        }
+
+        Console.WriteLine(" NUMEROS UNICOS DIGITADOS");
+
+        if (numUnicos.Count == 0)
+        {
+            Console.WriteLine("Nenhum numero foi digitado.");
+        }
+        else
+        {
+            foreach (int n in numUnicos)
+            {
+                Console.WriteLine(n);
+            }
+        }
+    }
+}
