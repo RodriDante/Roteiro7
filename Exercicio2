@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void Main()
+    {
+        Dictionary<int, string> catalogo = new Dictionary<int, string>();
+
+        while (true)
+        {
+            Console.WriteLine("CATALOGO DE PRODUTOS ");
+            Console.WriteLine("1 - Adicionar produto");
+            Console.WriteLine("2 - Buscar produto pelo codigo");
+            Console.WriteLine("3 - Listar todos os produtos");
+            Console.WriteLine("4 - Sair");
+            Console.Write("Escolha uma opcao: ");
+
+            string opcao = Console.ReadLine();
+            Console.WriteLine();
+
+            switch (opcao)
+            {
+                case "1":
+                    AdicProduto(catalogo);
+                    break;
+
+                case "2":
+                    BuscarProduto(catalogo);
+                    break;
+
+                case "3":
+                    ListarProdutos(catalogo);
+                    break;
+
+                case "4":
+                    Console.WriteLine("Saindo do programa...");
+                    return;
+
+                default:
+                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    break;
+            }
+        }
+    }
+
+    public static void AdicProduto(Dictionary<int, string> catalogo)
+    {
+        Console.Write("Digite o codigo do produto: ");
+        if (!int.TryParse(Console.ReadLine(), out int codigo))
+        {
+            Console.WriteLine("Codigo inválido. Deve ser um numero inteiro.");
+            return;
+        }
+
+        if (catalogo.ContainsKey(codigo))
+        {
+            Console.WriteLine("Ja existe um produto cadastrado com esse codigo!");
+            return;
+        }
+
+        Console.Write("Digite o nome do produto: ");
+        string nome = Console.ReadLine();
+
+        catalogo.Add(codigo, nome);
+        Console.WriteLine("Produto adicionado com sucesso!");
+    }
+
+    
+    public static void BuscarProduto(Dictionary<int, string> catalogo)
+    {
+        Console.Write("Digite o codigo do produto que deseja buscar: ");
+        if (!int.TryParse(Console.ReadLine(), out int codigo))
+        {
+            Console.WriteLine("Codigo invalido. Deve ser um numero inteiro.");
+            return;
+        }
+
+        if (catalogo.TryGetValue(codigo, out string nome))
+        {
+            Console.WriteLine($"Produto encontrado: {nome}");
+        }
+        else
+        {
+            Console.WriteLine("Produto não encontrado.");
+        }
+    }
+
+    public static void ListarProdutos(Dictionary<int, string> catalogo)
+    {
+        if (catalogo.Count == 0)
+        {
+            Console.WriteLine("Nenhum produto cadastrado.");
+            return;
+        }
+
+        Console.WriteLine("LISTA DE PRODUTOS ");
+        foreach (var item in catalogo)
+        {
+            Console.WriteLine($"Codigo: {item.Key} | Nome: {item.Value}");
+        }
+    }
+}
