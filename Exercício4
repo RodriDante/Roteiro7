@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void Main()
+    {
+        Queue<string> fila = new Queue<string>();
+
+        while (true)
+        {
+            Console.WriteLine(" FILA DE ATENDIMENTO ");
+            Console.WriteLine("1 - Adicionar cliente a fila");
+            Console.WriteLine("2 - Atender proximo cliente");
+            Console.WriteLine("3 - Ver quantos clientes estao na fila");
+            Console.WriteLine("4 - Sair");
+            Console.Write("Escolha uma opcao: ");
+            string opcao = Console.ReadLine();
+
+            Console.WriteLine();
+
+            switch (opcao)
+            {
+                case "1":
+                    AdicionarCliente(fila);
+                    break;
+
+                case "2":
+                    AtenderCliente(fila);
+                    break;
+
+                case "3":
+                    MostrarTamanhoFila(fila);
+                    break;
+
+                case "4":
+                    Console.WriteLine("Finalizando...");
+                    return;
+
+                default:
+                    Console.WriteLine("Opcao invalida. Tente novamente.");
+                    break;
+            }
+        }
+    }
+
+
+    public static void AdicionarCliente(Queue<string> fila)
+    {
+        Console.Write("Digite o nome do cliente: ");
+        string nome = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(nome))
+        {
+            Console.WriteLine("Nome invalido. Tente novamente.");
+            return;
+        }
+
+        fila.Enqueue(nome);
+        Console.WriteLine($"{nome} foi adicionado a fila!");
+    }
+
+    
+    public static void AtenderCliente(Queue<string> fila)
+    {
+        if (fila.Count == 0)
+        {
+            Console.WriteLine("Nao ha clientes na fila para atender.");
+        }
+        else
+        {
+            string proximo = fila.Dequeue();
+            Console.WriteLine($"Atendendo cliente: {proximo}");
+        }
+    }
+
+   
+    public static void MostrarTamanhoFila(Queue<string> fila)
+    {
+        Console.WriteLine("Clientes na fila: {fila.Count}");
+    }
+}
