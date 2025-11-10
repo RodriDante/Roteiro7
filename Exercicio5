@@ -1,0 +1,27 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void Main()
+    {
+        Console.Write("Insira uma palavra: ");
+        string palavra = Console.ReadLine();
+
+        Stack<char> pilha = new Stack<char>();
+
+        foreach (char c in palavra)
+        {
+            pilha.Push(c);
+        }
+
+        
+        string invertida = "";
+        while (pilha.Count > 0)
+        {
+            invertida += pilha.Pop();
+        }
+
+        Console.WriteLine($"Palavra invertida: {invertida}");
+    }
+}
